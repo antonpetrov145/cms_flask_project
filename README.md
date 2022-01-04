@@ -17,6 +17,18 @@ pip install -r requirements.txt
 ```
 The app defaults to using `127.0.0.1:5000` address.
 
+You have to make .env file in the toor dir of the app with the following:
+
+```
+SECRET_KEY=
+DB_USER=
+DB_PASSWORD=
+DB_ADDRESS=
+DB_PORT=
+DB_NAME=
+```
+
+
 **CAUTION** Read the whole document before attempting to use this app.
 
 ## Usage
@@ -87,6 +99,10 @@ PUT http://app-ip-address/posts/<pk of the post>
 
 DELETE http://app-ip-address/posts/<pk of the post>
 ```
+
+## Security
+
+The security is accomplished with the help of JWT for login and register.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
