@@ -17,7 +17,7 @@ pip install -r requirements.txt
 ```
 The app defaults to using `127.0.0.1:5000` address.
 
-You have to make .env file in the toor dir of the app with the following:
+You have to make `.env` file in the root dir of the app with the following:
 
 ```
 SECRET_KEY=
