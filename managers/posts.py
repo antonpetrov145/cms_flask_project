@@ -21,8 +21,9 @@ class PostManager:
             raise NotFound("Post not found")
         user = auth.current_user()
 
-        if not user.pk == post.author_pk:
-            raise NotFound("Post not found")
+        if user.role == "author":
+            if not user.pk == post.author_pk:
+                raise NotFound("Post not found")
 
         post_pk.update(post_data)
         db.session.add(post)
