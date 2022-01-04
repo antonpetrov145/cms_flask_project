@@ -1,0 +1,52 @@
+CMS
+
+USERS:
+    AMDINS:
+        Access all resources
+        Name
+        Email
+        Role
+    EDITORS:
+        Edit all posts
+        Name
+        Email
+        Posts
+        Role
+    AUTHORS:
+        Make posts
+        Edit only its posts
+        Name
+        Email
+        Own posts
+        Role
+    CLIENTS:
+        Make request for posts
+        Payment
+        Name
+        Email
+        Company (optional)
+        Phone
+        Requests
+        Role
+
+POSTS
+    Title
+    Content
+    Date posted
+    Author
+    Client
+
+CLIENTS REQUESTS
+    Client
+    Budget
+    Title
+    Words
+
+/login
+/register
+/clients - get by admins
+/clients/<int:pk>/posts - get,post,put,delete by clients
+/posts - get 
+/posts/<int:pk> - get,post,put,delete by authors and editors
+/posts/requests - get
+/posts/requests/<int:pk> - post,put,delete
