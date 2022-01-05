@@ -44,12 +44,12 @@ class PostManager:
     def get_author_posts(author_pk):
         posts = PostsModel.query.filter_by(author_pk=author_pk)
         if not posts:
-            return {"message": "User has no posts!"}
+            return {"message": "User has no posts!"}, 404
         return posts.all()
 
     @staticmethod
     def get_client_posts(client_pk):
         posts = PostsModel.query.filter_by(client_pk=client_pk)
         if not posts:
-            return {"message": "User has no posts!"}
+            return {"message": "User has no posts!"}, 404
         return posts.all()

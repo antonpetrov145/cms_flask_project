@@ -14,18 +14,19 @@ class EditorManager:
         editor_data["password"] = generate_password_hash(
             editor_data["password"], method="sha256"
         )
-        if CheckMail(editor_data["email"]):
+        if CheckMail(editor_data["email"]) == True:
             raise BadRequest("You cannot use temporary mail! Please use a real one!")
-        editor = EditorUserModel(**editor_data)
-        try:
-            db.session.add(editor)
-            db.session.flush()
-        except Exception as e:
-            if e.orig.pgcode == UNIQUE_VIOLATION:
-                raise BadRequest("Please login!")
-            else:
-                raise InternalServerError("Server Unavailable!")
-        return AuthManager.encode_token(editor)
+        else:
+            editor = EditorUserModel(**editor_data)
+            try:
+                db.session.add(editor)
+                db.session.flush()
+            except Exception as e:
+                if e.orig.pgcode == UNIQUE_VIOLATION:
+                    raise BadRequest("Please login!")
+                else:
+                    raise InternalServerError("Server Unavailable!")
+            return AuthManager.encode_token(editor)
 
     @staticmethod
     def login(data):

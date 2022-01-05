@@ -12,7 +12,7 @@ class CheckMail:
         mail = self.base_url + f"/email/{self.email}"
         response = requests.get(mail, headers=self.headers)
         temp_mail = response.json()["disposable"]
-        if temp_mail:
+        if temp_mail == True:
             return True
-        elif not temp_mail:
+        elif not temp_mail == False:
             return False

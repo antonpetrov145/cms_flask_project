@@ -37,7 +37,7 @@ class UpdatePost(Resource):
     @permission_required(allowed_updaters)
     def delete(self, pk):
         PostManager.delete(pk)
-        return {"message": "Deleted Post!"}
+        return {"message": "Deleted Post!"}, 204
 
 
 class AuthorPosts(Resource):

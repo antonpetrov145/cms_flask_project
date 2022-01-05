@@ -31,4 +31,4 @@ class UpdateAuthor(Resource):
     @permission_required("admin")
     def delete(self, pk):
         AuthorManager.delete(pk)
-        return {"message": "Deleted User!"}
+        return {"message": "Deleted User!"}, 204

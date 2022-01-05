@@ -31,4 +31,4 @@ class UpdateClient(Resource):
     @permission_required("admin")
     def delete(self, pk):
         ClientManager.delete(pk)
-        return {"message": "Deleted User!"}
+        return {"message": "Deleted User!"}, 204

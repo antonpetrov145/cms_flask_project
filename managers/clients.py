@@ -14,18 +14,19 @@ class ClientManager:
         client_data["password"] = generate_password_hash(
             client_data["password"], method="sha256"
         )
-        if CheckMail(client_data["email"]):
+        if CheckMail(client_data["email"]) == True:
             raise BadRequest("You cannot use temporary mail! Please use a real one!")
-        client = ClientUserModel(**client_data)
-        try:
-            db.session.add(client)
-            db.session.flush()
-        except Exception as e:
-            if e.orig.pgcode == UNIQUE_VIOLATION:
-                raise BadRequest("Please login!")
-            else:
-                raise InternalServerError("Server Unavailable!")
-        return AuthManager.encode_token(client)
+        else:
+            client = ClientUserModel(**client_data)
+            try:
+                db.session.add(client)
+                db.session.flush()
+            except Exception as e:
+                if e.orig.pgcode == UNIQUE_VIOLATION:
+                    raise BadRequest("Please login!")
+                else:
+                    raise InternalServerError("Server Unavailable!")
+            return AuthManager.encode_token(client)
 
     @staticmethod
     def login(data):
