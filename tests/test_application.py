@@ -5,7 +5,7 @@ from config import create_app
 from db import db
 
 from tests.base import generate_token
-from tests.factories import AuthorFactory, PostFactory
+from tests.factories import AuthorFactory, ClientFactory, PostFactory
 
 
 class TestApp(TestCase):
@@ -50,3 +50,34 @@ class TestApp(TestCase):
                 resp = self.client.delete(url, headers=headers)
             expected_message = {"message": "You don't have access for this request!"}
             self.assert_403(resp, expected_message)
+
+    def test_client_rights(self):
+        for method, url in [("GET", "/clients/1/posts")]:
+            client = ClientFactory()
+            token = generate_token(client)
+            headers = {"Authorization": f"Bearer {token}"}
+            if method == "GET":
+                resp = self.client.get(url, headers=headers)
+            self.assert200(resp)
+
+    def test_regular_user_access(self):
+        for method, url in [("GET", "/posts")]:
+            if method == "GET":
+                resp = self.client.get(url)
+            self.assert200(resp)
+
+    def test_post_create(self):
+        for method, url in [("POST", "/posts")]:
+            author = AuthorFactory()
+            token = generate_token(author)
+            headers = {"Authorization": f"Bearer {token}"}
+            post = PostFactory()
+            if method == "POST":
+                resp = self.client.post(
+                    url,
+                    data=json.dumps(
+                        {"title": post.title, "post_content": post.post_content}
+                    ),
+                    headers=headers,
+                )
+            self.assert200(resp)
