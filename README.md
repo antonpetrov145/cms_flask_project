@@ -29,7 +29,7 @@ DB_NAME=
 ```
 
 
-**CAUTION** Read the whole document before attempting to use this app.
+**CAUTION** Read the whole document before attempting to use this app. This app is **not** production ready!
 
 ## Usage
 
