@@ -14,9 +14,10 @@ class EditorManager:
         editor_data["password"] = generate_password_hash(
             editor_data["password"], method="sha256"
         )
-        if CheckMail(editor_data["email"]) == True:
+        disposable = CheckMail(editor_data["email"])
+        if disposable.check:
             raise BadRequest("You cannot use temporary mail! Please use a real one!")
-        else:
+        elif not disposable.check:
             editor = EditorUserModel(**editor_data)
             try:
                 db.session.add(editor)

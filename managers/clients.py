@@ -14,9 +14,10 @@ class ClientManager:
         client_data["password"] = generate_password_hash(
             client_data["password"], method="sha256"
         )
-        if CheckMail(client_data["email"]) == True:
+        disposable = CheckMail(client_data["email"])
+        if disposable.check:
             raise BadRequest("You cannot use temporary mail! Please use a real one!")
-        else:
+        elif not disposable.check:
             client = ClientUserModel(**client_data)
             try:
                 db.session.add(client)

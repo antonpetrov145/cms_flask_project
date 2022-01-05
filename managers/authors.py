@@ -14,9 +14,10 @@ class AuthorManager:
         author_data["password"] = generate_password_hash(
             author_data["password"], method="sha256"
         )
-        if CheckMail(author_data["email"]) == True:
+        disposable = CheckMail(author_data["email"])
+        if disposable.check:
             raise BadRequest("You cannot use temporary mail! Please use a real one!")
-        else:
+        elif not disposable.check:
             author = AuthorUserModel(**author_data)
             try:
                 db.session.add(author)
