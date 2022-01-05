@@ -66,6 +66,16 @@ POST http://app-ip-address/admins/register
 POST http://app-ip-address/admins/login
 ```
 
+On hitting both anedpoints you will receive a token that expires in **two days**.
+
+Example of hitting login endopoint:
+```
+{
+    "token": <token>,
+    "role": <role>
+}
+```
+
 ## Roles and permissions
 `Authors` can create, edit and delete its own posts.
 
