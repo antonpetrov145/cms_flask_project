@@ -14,14 +14,16 @@ class DevelopmentConfig:
 
 
 class TestingConfig:
+    FLASK_ENV = "testing"
     DEBUG = True
     TESTING = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_ADDRESS')}:{config('DB_PORT')}/{config('TESTING_DB_NAME')}"
 
 
-def create_app():
+def create_app(config="config.DevelopmentConfig"):
     app = Flask(__name__)
-    app.config.from_object("config.DevelopmentConfig")
+    app.config.from_object(config)
 
     api = Api(app)
     migrate = Migrate(compare_type=True)

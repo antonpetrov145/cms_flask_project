@@ -17,7 +17,7 @@ pip install -r requirements.txt
 ```
 The app defaults to using `127.0.0.1:5000` address.
 
-You have to make `.env` file in the root dir of the app with the following:
+You have to make `.env` file in the root dir of the app with the following environment variables:
 
 ```
 SECRET_KEY=
@@ -68,7 +68,7 @@ POST http://app-ip-address/admins/login
 
 On hitting both anedpoints you will receive a token that expires in **two days**.
 
-Example of hitting login endopoint:
+Example response after hitting login endopoint:
 ```
 {
     "token": <token>,
