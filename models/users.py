@@ -18,7 +18,6 @@ class AdminUserModel(BaseUserModel):
     role = db.Column(
         db.Enum(UserRolesEnum), default=UserRolesEnum.admin, nullable=False
     )
-    pass
 
 
 class AuthorUserModel(BaseUserModel):
@@ -28,7 +27,6 @@ class AuthorUserModel(BaseUserModel):
     role = db.Column(
         db.Enum(UserRolesEnum), default=UserRolesEnum.author, nullable=False
     )
-    pass
 
 
 class ClientUserModel(BaseUserModel):
@@ -39,7 +37,6 @@ class ClientUserModel(BaseUserModel):
     role = db.Column(
         db.Enum(UserRolesEnum), default=UserRolesEnum.client, nullable=False
     )
-    pass
 
 
 class EditorUserModel(BaseUserModel):
@@ -48,4 +45,3 @@ class EditorUserModel(BaseUserModel):
     role = db.Column(
         db.Enum(UserRolesEnum), default=UserRolesEnum.editor, nullable=False
     )
-    pass

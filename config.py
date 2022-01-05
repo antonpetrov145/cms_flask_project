@@ -28,7 +28,7 @@ def create_app(config="config.DevelopmentConfig"):
     api = Api(app)
     migrate = Migrate(compare_type=True)
     migrate.init_app(app, db)
-    db.init_app(app)
+    # db.init_app(app)
 
     [api.add_resource(*route) for route in routes]
     return app

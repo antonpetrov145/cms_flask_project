@@ -12,10 +12,11 @@ class TestApp(TestCase):
     def create_app(self):
         return create_app("config.TestingConfig")
 
-    def set_up(self):
+    def setUp(self):
         db.init_app(self.app)
+        db.create_all()
 
-    def tear_down(self):
+    def tearDown(self):
         db.session.remove()
         db.drop_all()
 
