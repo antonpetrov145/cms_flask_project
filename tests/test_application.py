@@ -67,17 +67,22 @@ class TestApp(TestCase):
             self.assert200(resp)
 
     def test_post_create(self):
+        author = AuthorFactory()
+        token = generate_token(author)
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        }
         for method, url in [("POST", "/posts")]:
-            author = AuthorFactory()
-            token = generate_token(author)
-            headers = {"Authorization": f"Bearer {token}"}
-            post = PostFactory()
             if method == "POST":
                 resp = self.client.post(
                     url,
                     data=json.dumps(
-                        {"title": post.title, "post_content": post.post_content}
+                        {
+                            "title": "My blog post title",
+                            "post_content": "My first blogpost content.",
+                        }
                     ),
                     headers=headers,
                 )
-            self.assert200(resp)
+            assert resp.status_code == 201

@@ -1,7 +1,8 @@
 from db import db
 from models.posts import PostsModel
-from werkzeug.exceptions import NotFound
+from werkzeug.exceptions import NotFound, Forbidden
 from managers.auth import auth
+from models.enums import UserRolesEnum
 
 
 class PostManager:
@@ -21,9 +22,9 @@ class PostManager:
             raise NotFound("Post not found")
         user = auth.current_user()
 
-        if user.role == "author":
+        if user.role == UserRolesEnum.author:
             if not user.pk == post.author_pk:
-                raise NotFound("Post not found")
+                raise Forbidden("Cannot edit post!")
 
         post_pk.update(post_data)
         db.session.add(post)

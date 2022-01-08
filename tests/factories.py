@@ -40,6 +40,7 @@ class PostFactory(BaseFactory):
     class Meta:
         model = PostsModel
 
-    pk = factory.Sequence(lambda n: n + 1)
-    title = factory.Faker("sentence", nb_words=5)
+    pk = factory.Sequence(lambda n: n)
+    title = factory.Faker("sentence", nb_words=10)
     post_content = factory.Faker("sentence", nb_words=20)
+    author_pk = None
